@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ANEKAMARKET | Premium Loading</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3a7bd5;
+            --secondary: #00d2ff;
+            --accent: #69b6ff;
+            --dark: #0f3460;
+            --darker: #16213e;
+            --darkest: #1a1a2e;
+            --gold: #FFD700;
+            --gold-light: rgba(255, 215, 0, 0.7);
+            --gold-glow: rgba(255, 215, 0, 0.5);
+            --platinum: #e5e4e2;
+            --diamond: #b9f2ff;
+            --lightning: #00f2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darkest) 0%, var(--darker) 50%, var(--dark) 100%);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            animation: bodyFadeIn 1.5s ease-out forwards;
+            touch-action: manipulation;
+        }
+
+        /* Particle Background - Optimized */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .gold-particle {
+            background: var(--gold-light);
+            filter: blur(0.8px);
+            box-shadow: 0 0 8px var(--gold-glow);
+            animation-name: float-gold;
+        }
+
+        .blue-particle {
+            background: var(--accent);
+            filter: blur(0.5px);
+            box-shadow: 0 0 8px rgba(105, 182, 255, 0.5);
+            animation-name: float-blue;
+        }
+
+        /* Premium Loading Container */
+        .loading-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            padding: 20px;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: containerFadeIn 1.2s ease-out 0.3s forwards;
+        }
+
+        /* Logo Animation - Preserved */
+        .logo-container {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(100, 149, 237, 0.7));
+            animation: 
+                fadeIn 1.5s ease-out forwards,
+                subtlePulse 4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 215, 0, 0.3) 0%,
+                rgba(185, 242, 255, 0.2) 40%,
+                transparent 70%
+            );
+            animation: pulseGlow 3s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        /* Text Animation - Preserved */
+        .text-animation {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--diamond), var(--accent), var(--gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine 3s linear infinite;
+            text-shadow: 0 0 10px rgba(105, 182, 255, 0.3);
+            text-align: center;
+        }
+
+        /* Progress Bar - Optimized */
+        .progress-container {
+            width: 90%;
+            max-width: 400px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 15px 0;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 3px;
+            transition: width 0.4s ease;
+            position: relative;
+            box-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 400px;
+            margin-bottom: 10px;
+        }
+
+        .percentage {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .loading-time {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        /* Loading Dots - Preserved */
+        .loading-animation {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .loading-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--diamond));
+            box-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+
+        .loading-dot:nth-child(1) { animation-delay: 0s; }
+        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+        .loading-dot:nth-child(4) { animation-delay: 0.6s; }
+
+        /* Loading Message */
+        .loading-message {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            line-height: 1.6;
+            animation: fade 3s infinite ease-in-out;
+        }
+
+        /* Copyright */
+        .copyright {
+            position: absolute;
+            bottom: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.6rem;
+            width: 100%;
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        /* Animations - Optimized */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes bodyFadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes containerFadeIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes float-gold {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            50% { transform: translate(20px, 20px) scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes float-blue {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            50% { transform: translate(-15px, 15px) scale(1.1); opacity: 0.7; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.9; }
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .fade-out {
+            animation: fadeOut 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to { 
+                opacity: 0; 
+                transform: scale(0.95);
+            }
+        }
+
+        /* Desktop Enhancements */
+        @media (min-width: 768px) {
+            .logo {
+                width: 150px;
+            }
+            
+            .logo-glow {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .text-animation {
+                font-size: 2.5rem;
+            }
+            
+            .progress-container {
+                height: 8px;
+            }
+            
+            .loading-dot {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        /* Performance Optimization */
+        @media (max-width: 480px) {
+            .particle {
+                animation-duration: 20s !important;
+            }
+            
+            .loading-dot {
+                animation-duration: 2s !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Loading Container -->
+    <div class="loading-container" id="loading-container">
+        <div class="logo-container">
+            <div class="logo-glow"></div>
+            <img src="https://raw.githubusercontent.com/LKS-88/aplikasi-anekamarket/refs/heads/main/LOGO%20ANEKAMARKET.png" alt="ANEKAMARKET Logo" class="logo">
+        </div>
+        
+        <h1 class="text-animation">ANEKAMARKET</h1>
+        
+        <div class="loading-content">
+            <div class="progress-info">
+                <span class="loading-time" id="loading-time">Initializing system...</span>
+                <span class="percentage" id="percentage">0%</span>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="loading-animation">
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+            </div>
+            
+            <div class="loading-message">
+                PREMIUM PLATFORM LOADING<br>
+                PREPARING YOUR EXCLUSIVE EXPERIENCE
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2025 ANEKAMARKET™ | All Rights Reserved<br>
+            A Premium Digital Solution by Lenter Karya Situbondo
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingContainer = document.getElementById('loading-container');
+            const progressBar = document.getElementById('progress-bar');
+            const percentageElement = document.getElementById('percentage');
+            const loadingTimeElement = document.getElementById('loading-time');
+            const particlesContainer = document.getElementById('particles');
+            
+            // Optimized particle creation
+            function createParticles() {
+                particlesContainer.innerHTML = '';
+                
+                // Adjusted particle count based on device
+                const particleCount = window.innerWidth < 768 ? 40 : 80;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    createParticle('gold', i);
+                    createParticle('blue', i);
+                }
+            }
+            
+            function createParticle(type, index) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle', `${type}-particle`);
+                
+                const size = type === 'gold' ? Math.random() * 4 + 2 : Math.random() * 3 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                const duration = (Math.random() * 15 + 10) * (window.innerWidth < 480 ? 1.5 : 1);
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Loading animation with preserved effects
+            function startLoadingAnimation() {
+                const milestones = [
+                    { time: 800, percent: 5, message: "Starting premium systems..." },
+                    { time: 2000, percent: 20, message: "Loading luxury modules..." },
+                    { time: 3500, percent: 35, message: "Initializing secure database..." },
+                    { time: 5000, percent: 50, message: "Halfway there..." },
+                    { time: 6500, percent: 65, message: "Optimizing performance..." },
+                    { time: 8000, percent: 80, message: "Finalizing components..." },
+                    { time: 9500, percent: 95, message: "Almost ready..." },
+                    { time: 10000, percent: 100, message: "Ready to launch..." }
+                ];
+                
+                const startTime = Date.now();
+                const totalDuration = 11000; // 11 seconds total
+                
+                function update() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / totalDuration, 1);
+                    
+                    // Find current milestone
+                    let currentMilestone = milestones[milestones.length - 1];
+                    for (const milestone of milestones) {
+                        if (elapsed >= milestone.time) {
+                            currentMilestone = milestone;
+                        } else {
+                            break;
+                        }
+                    }
+                    
+                    // Update UI
+                    progressBar.style.width = `${currentMilestone.percent}%`;
+                    percentageElement.textContent = `${currentMilestone.percent}%`;
+                    loadingTimeElement.textContent = currentMilestone.message;
+                    
+                    // Enhanced effects at different percentages
+                    if (currentMilestone.percent > 50) {
+                        progressBar.style.boxShadow = `0 0 10px rgba(0, 210, 255, 0.6)`;
+                    }
+                    if (currentMilestone.percent > 80) {
+                        progressBar.style.boxShadow = `0 0 15px rgba(255, 215, 0, 0.7)`;
+                    }
+                    
+                    // Handle completion
+                    if (currentMilestone.percent === 100) {
+                        if (elapsed >= totalDuration - 800) {
+                            loadingContainer.classList.add('fade-out');
+                            setTimeout(() => {
+                                window.location.href = 'https://lks-88.github.io/transaksi/';
+                            }, 800);
+                        } else {
+                            const remaining = (totalDuration - elapsed) / 1000;
+                            loadingTimeElement.textContent = `Launching in ${remaining.toFixed(1)}s...`;
+                        }
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                }
+                
+                update();
+            }
+            
+            // Preload logo image
+            const logoImage = new Image();
+            logoImage.src = 'https://raw.githubusercontent.com/LKS-88/aplikasi-anekamarket/refs/heads/main/LOGO%20ANEKAMARKET.png';
+            logoImage.onload = () => {
+                createParticles();
+                setTimeout(startLoadingAnimation, 300);
+            };
+            
+            // Handle resize with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    createParticles();
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
