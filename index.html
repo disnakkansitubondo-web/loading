@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>APLIKASI BARJAS | Premium Loading</title>
+    <title>PORTAL APLIKASI | Premium Loading</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,8 +20,9 @@
             --platinum: #e5e4e2;
             --diamond: #b9f2ff;
             --lightning: #00f2ff;
-            --success: #25D366;
-            --success-dark: #128C7E;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --info: #2196F3;
         }
 
         * {
@@ -96,7 +97,7 @@
             animation: containerFadeIn 1.2s ease-out 0.3s forwards;
         }
 
-        /* Portal Selection Container */
+        /* Portal Container */
         .portal-container {
             position: absolute;
             top: 0;
@@ -172,135 +173,20 @@
             text-align: center;
         }
 
-        /* Portal Title */
         .portal-title {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
             font-family: 'Playfair Display', serif;
             margin-bottom: 30px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             background: linear-gradient(90deg, var(--gold), var(--diamond), var(--accent), var(--gold));
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             animation: shine 3s linear infinite;
-            text-shadow: 0 0 10px rgba(105, 182, 255, 0.3);
+            text-shadow: 0 0 15px rgba(105, 182, 255, 0.5);
             text-align: center;
-        }
-
-        /* Enhanced Button Styles */
-        .portal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            width: 100%;
-            max-width: 420px;
-            margin-bottom: 40px;
-        }
-
-        .portal-button {
-            padding: 18px 28px;
-            border-radius: 16px;
-            border: none;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            text-decoration: none;
-            text-align: center;
-            z-index: 1;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .portal-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-            z-index: -1;
-        }
-
-        .portal-button:hover::before {
-            transform: translateX(100%);
-        }
-
-        .portal-button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            border-radius: 16px;
-            z-index: -2;
-        }
-
-        .barjas-button {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 6px 25px rgba(58, 123, 213, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .sismat-button {
-            background: linear-gradient(135deg, var(--dark), var(--primary));
-            color: white;
-            box-shadow: 0 6px 25px rgba(15, 52, 96, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .help-button {
-            background: linear-gradient(135deg, var(--success), var(--success-dark));
-            color: white;
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .portal-button:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-        }
-
-        .portal-button:active {
-            transform: translateY(0) scale(0.98);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .button-icon {
-            font-size: 1.3rem;
-            transition: transform 0.3s ease;
-        }
-
-        .portal-button:hover .button-icon {
-            transform: scale(1.2);
-        }
-
-        .button-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: linear-gradient(135deg, var(--gold), #ffb347);
-            color: var(--darkest);
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 12px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s infinite;
         }
 
         /* Progress Bar - Optimized */
@@ -379,6 +265,102 @@
             animation: fade 3s infinite ease-in-out;
         }
 
+        /* Button Styles */
+        .portal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px 0;
+        }
+
+        .portal-button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.7), rgba(26, 26, 46, 0.9));
+            border: 2px solid rgba(105, 182, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .portal-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .portal-button:hover {
+            transform: translateY(-3px);
+            border-color: var(--gold);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .portal-button:hover::before {
+            left: 100%;
+        }
+
+        .portal-button:active {
+            transform: translateY(0);
+        }
+
+        .button-icon {
+            margin-right: 15px;
+            font-size: 1.5rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .button-text {
+            flex: 1;
+        }
+
+        .button-arrow {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: transform 0.3s ease;
+        }
+
+        .portal-button:hover .button-arrow {
+            transform: translateX(5px);
+            opacity: 1;
+        }
+
+        .barjas-button {
+            --button-color: var(--info);
+        }
+
+        .sismat-button {
+            --button-color: var(--success);
+        }
+
+        .help-button {
+            --button-color: var(--warning);
+        }
+
+        .portal-button:hover {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.9), rgba(26, 26, 46, 1));
+            border-color: var(--button-color);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--button-color);
+        }
+
         /* Copyright */
         .copyright {
             position: absolute;
@@ -444,15 +426,6 @@
             50% { opacity: 1; }
         }
 
-        @keyframes shimmer {
-            100% { transform: translateX(100%); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
         .fade-out {
             animation: fadeOut 0.8s ease-out forwards;
         }
@@ -475,12 +448,8 @@
                 height: 130px;
             }
             
-            .text-animation {
+            .text-animation, .portal-title {
                 font-size: 2.5rem;
-            }
-            
-            .portal-title {
-                font-size: 2.2rem;
             }
             
             .progress-container {
@@ -491,17 +460,19 @@
                 width: 12px;
                 height: 12px;
             }
-            
+
             .portal-buttons {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
+                gap: 25px;
             }
-            
+
             .portal-button {
-                flex: 1;
-                min-width: 200px;
                 padding: 20px 30px;
+                font-size: 1.1rem;
+            }
+
+            .button-icon {
+                font-size: 1.8rem;
+                width: 35px;
             }
         }
 
@@ -514,14 +485,21 @@
             .loading-dot {
                 animation-duration: 2s !important;
             }
-            
+
             .portal-title {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+                margin-bottom: 20px;
             }
-            
+
             .portal-button {
-                padding: 16px 24px;
-                font-size: 1rem;
+                padding: 15px 20px;
+                font-size: 0.9rem;
+            }
+
+            .button-icon {
+                font-size: 1.3rem;
+                margin-right: 12px;
+                width: 25px;
             }
         }
     </style>
@@ -537,7 +515,7 @@
             <img src="https://raw.githubusercontent.com/disnakkansitubondo-web/loading/refs/heads/main/logo-barjas.png" alt="APLIKASI BARJAS Logo" class="logo">
         </div>
         
-        <h1 class="text-animation">APLIKASI BARJAS</h1>
+        <h1 class="text-animation">PORTAL SISTEM</h1>
         
         <div class="loading-content">
             <div class="progress-info">
@@ -568,32 +546,32 @@
         </div>
     </div>
 
-    <!-- Portal Selection Container -->
+    <!-- Portal Container -->
     <div class="portal-container" id="portal-container">
         <div class="logo-container">
             <div class="logo-glow"></div>
             <img src="https://raw.githubusercontent.com/disnakkansitubondo-web/loading/refs/heads/main/logo-barjas.png" alt="APLIKASI BARJAS Logo" class="logo">
         </div>
         
-        <h2 class="portal-title">PORTAL SISTEM APLIKASI</h2>
+        <h1 class="portal-title">PORTAL APLIKASI</h1>
         
         <div class="portal-buttons">
-            <a href="https://www.barjas.com" class="portal-button barjas-button">
-                <span class="button-icon"><i class="fas fa-chart-bar"></i></span>
-                <span>Aplikasi BARJAS</span>
-                <span class="button-badge">PREMIUM</span>
+            <a href="https://disnakkansitubondo-web.github.io/barjas/" class="portal-button barjas-button">
+                <div class="button-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="button-text">Aplikasi BARJAS</div>
+                <div class="button-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             
-            <a href="https://www.sismat.com" class="portal-button sismat-button">
-                <span class="button-icon"><i class="fas fa-chart-line"></i></span>
-                <span>Aplikasi SISMAT</span>
-                <span class="button-badge">PRO</span>
+            <a href="https://disnakkansitubondo-web.github.io/sismat/" class="portal-button sismat-button">
+                <div class="button-icon"><i class="fas fa-database"></i></div>
+                <div class="button-text">Aplikasi SISMAT</div>
+                <div class="button-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
             
             <a href="https://wa.me/6285647709114?text=Halo,%20saya%20meminta%20bantuan%20informasi%20detail%20terkait%20penggunaan%20portal%20sistem" class="portal-button help-button">
-                <span class="button-icon"><i class="fab fa-whatsapp"></i></span>
-                <span>Bantuan</span>
-                <span class="button-badge">24/7</span>
+                <div class="button-icon"><i class="fas fa-question-circle"></i></div>
+                <div class="button-text">Bantuan</div>
+                <div class="button-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
         </div>
         
@@ -686,7 +664,7 @@
                         progressBar.style.boxShadow = `0 0 15px rgba(255, 215, 0, 0.7)`;
                     }
                     
-                    // Handle completion - Show portal instead of redirecting
+                    // Handle completion
                     if (currentMilestone.percent === 100) {
                         if (elapsed >= totalDuration - 800) {
                             loadingContainer.classList.add('fade-out');
