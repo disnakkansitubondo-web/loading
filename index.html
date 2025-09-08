@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PORTAL APLIKASI | Premium Loading</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #3a7bd5;
@@ -19,6 +20,8 @@
             --platinum: #e5e4e2;
             --diamond: #b9f2ff;
             --lightning: #00f2ff;
+            --success: #00c853;
+            --error: #ff1744;
         }
 
         * {
@@ -222,6 +225,156 @@
             animation: fade 3s infinite ease-in-out;
         }
 
+        /* Premium Button Styles */
+        .premium-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .premium-btn {
+            position: relative;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .premium-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .premium-btn:hover::before {
+            left: 100%;
+        }
+
+        .premium-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .premium-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 0 15px rgba(58, 123, 213, 0.5);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(58, 123, 213, 0.7), 0 0 30px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), #ffb347);
+            color: var(--darkest);
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 0 0 30px rgba(255, 179, 71, 0.4);
+        }
+
+        /* Quick Actions Panel */
+        .quick-actions {
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+        }
+
+        .quick-actions h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .action-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+
+        .action-btn span {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         /* Copyright */
         .copyright {
             position: absolute;
@@ -321,6 +474,15 @@
                 width: 12px;
                 height: 12px;
             }
+
+            .premium-btn {
+                padding: 14px 28px;
+                font-size: 0.9rem;
+            }
+
+            .action-buttons {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         /* Performance Optimization */
@@ -331,6 +493,21 @@
             
             .loading-dot {
                 animation-duration: 2s !important;
+            }
+
+            .premium-buttons {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .premium-btn {
+                width: 80%;
+                justify-content: center;
+            }
+
+            .action-buttons {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -370,6 +547,42 @@
                 PREPARING YOUR EXCLUSIVE EXPERIENCE
             </div>
         </div>
+
+        <!-- Premium Buttons -->
+        <div class="premium-buttons">
+            <button class="premium-btn btn-primary" id="btn-login">
+                <i class="fas fa-key"></i> Login
+            </button>
+            <button class="premium-btn btn-secondary" id="btn-register">
+                <i class="fas fa-user-plus"></i> Register
+            </button>
+            <button class="premium-btn btn-gold" id="btn-premium">
+                <i class="fas fa-crown"></i> Premium Access
+            </button>
+        </div>
+
+        <!-- Quick Actions Panel -->
+        <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+                <div class="action-btn" id="action-support">
+                    <i class="fas fa-headset"></i>
+                    <span>Support</span>
+                </div>
+                <div class="action-btn" id="action-docs">
+                    <i class="fas fa-book"></i>
+                    <span>Documentation</span>
+                </div>
+                <div class="action-btn" id="action-settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="action-btn" id="action-about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </div>
+            </div>
+        </div>
         
         <div class="copyright">
             © 2025 CENDHANU™ | All Rights Reserved<br>
@@ -384,6 +597,76 @@
             const percentageElement = document.getElementById('percentage');
             const loadingTimeElement = document.getElementById('loading-time');
             const particlesContainer = document.getElementById('particles');
+            
+            // Button elements
+            const btnLogin = document.getElementById('btn-login');
+            const btnRegister = document.getElementById('btn-register');
+            const btnPremium = document.getElementById('btn-premium');
+            const actionSupport = document.getElementById('action-support');
+            const actionDocs = document.getElementById('action-docs');
+            const actionSettings = document.getElementById('action-settings');
+            const actionAbout = document.getElementById('action-about');
+            
+            // Add button event listeners
+            btnLogin.addEventListener('click', function() {
+                showNotification('Login option selected');
+            });
+            
+            btnRegister.addEventListener('click', function() {
+                showNotification('Registration panel opening');
+            });
+            
+            btnPremium.addEventListener('click', function() {
+                showNotification('Premium access requested');
+            });
+            
+            // Quick actions event listeners
+            actionSupport.addEventListener('click', function() {
+                showNotification('Support center opening');
+            });
+            
+            actionDocs.addEventListener('click', function() {
+                showNotification('Documentation loading');
+            });
+            
+            actionSettings.addEventListener('click', function() {
+                showNotification('Settings panel opening');
+            });
+            
+            actionAbout.addEventListener('click', function() {
+                showNotification('About information loading');
+            });
+            
+            // Function to show notification
+            function showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.position = 'fixed';
+                notification.style.bottom = '70px';
+                notification.style.left = '50%';
+                notification.style.transform = 'translateX(-50%)';
+                notification.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                notification.style.color = 'white';
+                notification.style.padding = '10px 20px';
+                notification.style.borderRadius = '5px';
+                notification.style.zIndex = '1000';
+                notification.style.fontSize = '0.8rem';
+                notification.style.backdropFilter = 'blur(10px)';
+                notification.style.border = '1px solid rgba(255, 215, 0, 0.3)';
+                notification.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.2)';
+                
+                document.body.appendChild(notification);
+                
+                // Remove notification after 3 seconds
+                setTimeout(function() {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.5s ease';
+                    setTimeout(function() {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 3000);
+            }
             
             // Optimized particle creation
             function createParticles() {
